@@ -1,6 +1,7 @@
 import kue from 'kue'
 import redis from 'redis'
 import { get } from 'lodash'
+import fs from 'fs'
 
 import configs from '../configs'
 import bots from './bots'
@@ -62,12 +63,20 @@ queue.process(BOT_JOB_CRAWLERS, MAX_CRAWLER_PROCESS, async (job, done) => {
 
     if (article.url && article.url[0] !== '#') {
       try {
-        const data = await bot.crawlArticle('https://wikipedia.org' + article.url)
+        const { thumb } = await bot.crawlArticle('https://wikipedia.org' + article.url)
+        if (thumb) {
+          articles[i].thumb = thumb
+          console.log(thumb) // eslint-disable-line
+        }
       } catch (error) {
         // console.log(error) // eslint-disable-line
       }
     }
   }
+
+  fs.writeFile(name + '.json', JSON.stringify(articles), 'utf8', () => {
+    console.log('Done') // eslint-disable-line
+  })
 
   done()
 })

@@ -61,7 +61,6 @@ export default class Bot {
   }
 
   crawlArticle(uri) {
-    console.log(uri)
     const opts = {
       uri,
       transform: body => cheerio.load(body),

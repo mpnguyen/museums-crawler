@@ -1,9 +1,9 @@
 import Bot from './botCore'
 
-const NAME = 'indonesiaBot'
-const HOST = 'https://en.wikipedia.org/wiki/List_of_museums_and_cultural_institutions_in_Indonesia'
+const NAME = 'bruneiBot'
+const HOST = 'https://en.wikipedia.org/wiki/List_of_museums_in_Brunei'
 
-export default class indonesiaBot extends Bot {
+export default class bruneiBot extends Bot {
   constructor() {
     super(NAME, HOST)
   }

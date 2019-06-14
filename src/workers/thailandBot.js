@@ -1,9 +1,9 @@
 import Bot from './botCore'
 
-const NAME = 'indonesiaBot'
-const HOST = 'https://en.wikipedia.org/wiki/List_of_museums_and_cultural_institutions_in_Indonesia'
+const NAME = 'thailandBot'
+const HOST = 'https://en.wikipedia.org/wiki/List_of_museums_in_Thailand'
 
-export default class indonesiaBot extends Bot {
+export default class thailandBot extends Bot {
   constructor() {
     super(NAME, HOST)
   }
@@ -11,10 +11,11 @@ export default class indonesiaBot extends Bot {
   _getHomePageArticles($) {
     const articles = []
     // listing
-    $('li').each((_, el) => {
-      const title = $(el).text().trim()
+    $('tr').each((_, el) => {
+      const title = $(el).children('td').first().text().trim()
+
       articles.push({
-        url: $(el).children('a').attr('href'),
+        url: $(el).children('td').first().children('a').attr('href'),
         title,
       })
     })
